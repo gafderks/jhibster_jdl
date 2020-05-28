@@ -1,0 +1,393 @@
+:revnumber: {docVersion}
+:toclevels: 1
+:docinfo2:
+:sectnumlevels: 1
+:sectnums!:
+:baseUrl: http://localhost:3000/api/tasks
+
+= Task API Documentation
+{docdate}
+
+== Introduction
+
+This is the documentation for the Task API.
+
+The Task API is a collection of CRUD API endpoints used to manipulate tasks registered in the application.
+
+[source, json, options="nowrap",  subs="attributes"]
+.Endpoints
+----
+GET    {baseUrl}
+POST   {baseUrl}
+GET    {baseUrl}/{id}
+PUT    {baseUrl}/{id}
+DELETE {baseUrl}/{id}
+----
+
+For a detailed explanation of the endpoints see below
+
+:sectnums:
+
+== GET: Get tasks
+
+.Purpose
+Obtains a list of tasks
+
+=== Request
+[caption=""]
+.HTTP Request Header Parameters
+|===
+|Header|Value
+
+|Content-Type|application/json
+|===
+
+
+[caption=""]
+.Request properties
+|===
+|Property|Value
+
+|URL|{baseUrl}
+|Method|GET
+|===
+
+.Path parameters
+* not applicable
+
+.Request Body
+* not applicable
+
+.Sample request
+[source, json, options="nowrap", subs="attributes"]
+----
+GET {baseUrl}
+----
+
+=== Response
+
+Our controller's method returns a list of tasks represented as JSON
+
+[caption=""]
+.HTTP Response Header Parameters
+|===
+|Header|Value
+
+|Content-Type|application/json
+|===
+
+[caption=""]
+.Response messages
+|===
+|HTTP Status Code |Reason
+
+|200|OK
+|===
+
+.Response body
+The response body contains a JSON representation of the list of tasks or an empty list ([])
+
+.Sample response
+[source, json, options="nowrap"]
+----
+[{
+	title: "Elton Cole", 
+	description: "Earle Cummings", 
+	duedate: DateTime.fromObject({day: 19, month: 12, year: 2020, hour:18, minute: 33, seconds: 22}), 
+	attachment: "Carey Graham"
+}, 
+{
+	title: "Kendall Collins II", 
+	description: "Mrs. Lawrence Kovacek", 
+	duedate: DateTime.fromObject({day: 25, month: 11, year: 2018, hour:22, minute: 30, seconds: 22}), 
+	attachment: "Patrick Runolfsson DVM"
+}, 
+{
+	title: "Kai Rice", 
+	description: "Ezequiel Marquardt", 
+	duedate: DateTime.fromObject({day: 1, month: 7, year: 2023, hour:4, minute: 2, seconds: 22}), 
+	attachment: "Michael Upton"
+}]
+----
+
+== POST: Create task
+
+.Purpose
+Create a task
+
+=== Request
+
+[caption=""]
+.HTTP Request Header Parameters
+|===
+|Header|Value
+
+|Content-Type|application/json
+|===
+
+
+[caption=""]
+.Request properties
+|===
+|Property|Value
+
+|URL|{baseUrl}
+|Method|POST
+|===
+
+.Path parameters
+* not applicable
+
+
+.Request Body
+The request body contains a JSON representation of the new to be created task **WITHOUT the id**, since the id is set by the application
+
+.Sample request
+[source, json, options="nowrap", subs="attributes"]
+----
+POST {baseUrl}
+----
+
+.Sample request body
+[source, json, options="nowrap"]
+----
+{
+	title: "Nolan Beier", 
+	description: "Anya Simonis MD", 
+	duedate: DateTime.fromObject({day: 22, month: 6, year: 2018, hour:3, minute: 5, seconds: 22}), 
+	attachment: "Tara Bergstrom"
+}
+----
+
+=== Response
+
+The response body contains a JSON representation of the created task
+
+[caption=""]
+.HTTP Response Header Parameters
+|===
+|Header|Value
+
+|Content-Type|application/json
+|===
+
+[caption=""]
+.Response messages
+|===
+|HTTP Status Code |Reason
+
+|200|OK
+|===
+
+.Response body
+Our controller's method returns the created task respresented as JSON **WITH the id**, since the id is NOW set by the application
+
+.Sample response body
+[source, json, options="nowrap"]
+----
+{
+	title: "Hilton Ernser", 
+	description: "Jonah Mills", 
+	duedate: DateTime.fromObject({day: 8, month: 7, year: 2019, hour:11, minute: 19, seconds: 22}), 
+	attachment: "Sallie Cole"
+}
+----
+
+== GET: Get task
+
+.Purpose
+Obtains a specific task registered in the application by it's unique identifier
+
+=== Request
+
+[caption=""]
+.HTTP Request Header Parameters
+|===
+|Header|Value
+
+|Content-Type|application/json
+|===
+
+[caption=""]
+.Request properties
+|===
+|Property|Value
+
+|URL|{baseUrl}/{id}
+|Method|GET
+|===
+
+
+.Path parameters
+* id: an Integer as the identifier of the task to be obtained
+
+.Request Body
+* not applicable
+
+.Sample request
+[source, json, options="nowrap", subs="attributes"]
+----
+GET {baseUrl}/3
+----
+
+=== Response
+
+Our controller's method returns a task represented as JSON
+
+[caption=""]
+.HTTP Response Header Parameters
+|===
+|Header|Value
+
+|Content-Type|application/json
+|===
+
+[caption=""]
+.Response messages
+|===
+|HTTP Status Code |Reason
+
+|200|OK
+|404|Not found
+|===
+
+.Response body
+The response body contains a JSON representation of the requested Task by {id} or is empty when the Task is not found
+
+.Sample response body
+[source, json, options="nowrap"]
+----
+{
+	title: "Breann Steuber", 
+	description: "Jessie Funk", 
+	duedate: DateTime.fromObject({day: 7, month: 12, year: 2021, hour:16, minute: 36, seconds: 22}), 
+	attachment: "Londa Treutel"
+}
+----
+
+== PUT: Update task
+
+.Purpose
+Update a task
+
+=== Request
+
+[caption=""]
+.HTTP Request Header Parameters
+|===
+|Header|Value
+
+|Content-Type|application/json
+|===
+
+
+[caption=""]
+.Request properties
+|===
+|Property|Value
+
+|URL|{baseUrl}/{id}
+|Method|PUT
+|===
+
+.Path parameters
+* id: an Integer as the identifier of the task to be updated
+
+.Request Body
+The request body contains a JSON representation of the update of the properties of the task **WITHOUT the id**, since the id is sent as the Path Parameter
+
+.Sample request
+[source, json, options="nowrap", subs="attributes"]
+----
+PUT {baseUrl}/4
+----
+
+.Sample request body
+[source, json, options="nowrap"]
+----
+{
+	title: "Velva Jones DVM", 
+	description: "Mr. Gustavo Nienow", 
+	duedate: DateTime.fromObject({day: 25, month: 4, year: 2020, hour:3, minute: 17, seconds: 22}), 
+	attachment: "Clint Lesch"
+}
+----
+
+=== Response
+
+Our controller's method returns the updated task respresented as JSON **WITH the id**
+
+[caption=""]
+.HTTP Response Header Parameters
+|===
+|Header|Value
+
+|Content-Type|application/json
+|===
+
+[caption=""]
+.Response messages
+|===
+|HTTP Status Code |Reason
+
+|200|OK
+|404|Not found
+|===
+
+.Response body
+The response body contains a JSON representation of the updated task
+
+.Sample response body
+[source, json, options="nowrap"]
+----
+{
+	title: "Britt Schneider MD", 
+	description: "Milton Nienow Sr.", 
+	duedate: DateTime.fromObject({day: 3, month: 6, year: 2022, hour:5, minute: 8, seconds: 22}), 
+	attachment: "Rachel Blick"
+}
+----
+
+== DELETE: Delete task
+
+.Purpose
+Delete a specific task registered in the application by it's unique identifier
+
+=== Request
+
+[caption=""]
+.Request properties
+|===
+|Property|Value
+
+|URL|{baseUrl}/{id}
+|Method|DELETE
+|===
+
+.Path parameters
+* id: an Integer as the identifier of the task to be obtained
+
+.Request Body
+* not applicable
+
+.Sample request
+[source, json, options="nowrap",  subs="attributes"]
+----
+DELETE {baseUrl}/3
+----
+
+=== Response
+
+Our controller's method returns a statuscode based on the success of the deletion
+
+[caption=""]
+.Response messages
+|===
+|HTTP Status Code |Reason
+
+|204|No Content
+|404|Not found
+|===
+
+.Response body
+* not applicable

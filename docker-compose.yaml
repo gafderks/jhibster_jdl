@@ -1,0 +1,29 @@
+version: '3'
+services:
+  db:
+    build:
+      context: .
+      dockerfile: Dockerfile-db
+    image: jhipster_jdl_db
+    networks:
+     - jhipster_jdl
+    ports:
+      - '3306:3306'
+      - '33060:33060'
+    environment:
+    - MYSQL_ROOT_HOST=%
+    - MYSQL_ROOT_PASSWORD=mysecret
+    - MYSQL_DATABASE=jhipster_jdl
+
+  api:
+    build:
+      context: .
+      dockerfile: Dockerfile-api
+    image: jhipster_jdl_api
+    networks:
+     - jhipster_jdl
+    ports:
+      - '3000:3000'
+
+networks:
+     jhipster_jdl:

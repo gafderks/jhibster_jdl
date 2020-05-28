@@ -1,0 +1,9 @@
+:revnumber: {docVersion}
+:toclevels: 1
+:docinfo2:
+:sectnumlevels: 1
+:sectnums!:
+
+= Jhipster_jdl API documentation
+
+== <<tasks.api.adoc#, Task API documentation>>

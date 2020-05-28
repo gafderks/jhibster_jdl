@@ -1,0 +1,26 @@
+{
+	"name": "jhipster_jdl",
+	"version": "0.1.0-SNAPSHOT",
+	"description": "jhipster_jdl application",
+	"private": true,
+	"main": "app.js",
+	"directories": {
+		"test": "test"
+	},
+	"scripts": {
+		"test": "./node_modules/.bin/mocha",
+		"asciidoc": "node ./apidocs/asciidoc.js"
+	},
+	"license": "ISC",
+	"dependencies": {
+		"express": "*",
+		"luxon": "*",
+		"mysql": "*"
+	},
+	"devDependencies": {
+		"chai": "*",
+		"mocha": "5.2.0",
+		"asciidoctor": "^2.2.0",
+		"request": "*"
+	}
+}

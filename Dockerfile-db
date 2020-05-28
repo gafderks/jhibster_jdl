@@ -1,0 +1,6 @@
+FROM mysql/mysql-server:latest
+
+COPY create_db_in_container.sql /docker-entrypoint-initdb.d
+
+EXPOSE 3306
+EXPOSE 33060
